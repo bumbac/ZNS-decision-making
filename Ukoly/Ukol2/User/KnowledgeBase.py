@@ -49,6 +49,22 @@ class KnowledgeBase(IKnowledgeBase):
                 Logger.log('Not all guards')
         return flag
 
+    def check_positions(self) -> bool:
+        flag = True
+        if self.map_proxy.is_position_occupied(CubicPosition(-1, 1, 0)):
+            flag = False
+        if self.map_proxy.is_position_occupied(CubicPosition(-1, 0, 1)):
+            flag = False
+        if self.map_proxy.is_position_occupied(CubicPosition(0, 1, -1)):
+            flag = False
+        if self.map_proxy.is_position_occupied(CubicPosition(0, -1, 1)):
+            flag = False
+        if self.map_proxy.is_position_occupied(CubicPosition(1, -1, 0)):
+            flag = False
+        if self.map_proxy.is_position_occupied(CubicPosition(1, 0, -1)):
+            flag = False
+        return flag
+
     def cross_free(self) -> bool:
         flag = True
         if self.map_proxy.is_position_occupied(CubicPosition(0, 2, -2)):
@@ -82,22 +98,28 @@ class KnowledgeBase(IKnowledgeBase):
             facts.append(Fact('player_dont_have_base'))
         else:
             facts.append(Fact('player_have_base'))
-
-        #inner guards for long range
+        #resources and positions for first line of defense Archers
+        if self.game_object_proxy.get_resources(self.player) >= 30:
+            if self.check_positions():
+                facts.append(Fact('can_place_archer'))
+        #resources and positions for FLoD Knights
         if self.game_object_proxy.get_resources(self.player) >= 60:
-            facts.append(Fact('can_buy_guard'))
+            if self.check_positions():
+                facts.append(Fact('can_place_knight'))
 
-        #placing druids in corners
+        #placing druids in corners, only if inner circle of guards is intact
         if self.game_object_proxy.get_resources(self.player) >= 100 and self.has_guards():
             facts.append(Fact('has_guards'))
             facts.append(Fact('has_resources_druid'))
 
-        #place knights for defense line
+        #place knights for second defense line
         if self.game_object_proxy.get_resources(self.player) >= 120:
             facts.append(Fact('can_buy_extended_guard'))
+
         #resources for ENT
         if self.game_object_proxy.get_resources(self.player) >= 200:
             facts.append(Fact('has_resources_ent'))
+
         #position for ENT
         if self.cross_free():
             facts.append(Fact('cross_not_occupied'))

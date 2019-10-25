@@ -4,11 +4,19 @@
 # Grammar definition is described in documentation
 
 
+#place base with first line of defense (FLoD)
+IF player_dont_have_base AND can_place_archer THEN place_base;
 
-IF player_dont_have_base THEN place_base;
-IF player_have_base AND has_resources_druid THEN place_druid;
-IF player_have_base THEN place_guard 2;
+#first repair FLoD, fill with archers (1)
+IF player_have_base AND can_place_archer THEN place_guard 1;
+
+#if FLoD is intact place remote long range troops-druid
+IF player_have_base AND has_guards AND has_resources_druid THEN place_druid_square;
+
+#make second line of defense with knights
 IF player_have_base AND can_buy_extended_guard THEN place_extended;
+
+#corners are filled with druids, cross position fill with ents if free (has many HP)
 IF player_have_base AND cross_not_occupied AND has_resources_ent THEN place_cross_ent;
 
 

@@ -142,7 +142,7 @@ class ActionBase(IActionBase):
                                      x,
                                      [], []))
 
-    def place_druid(self):
+    def place_druid_square(self):
         Logger.log('Placing druid in corner')
         x = CubicPosition(-2, 2, 0)
         troop = GameObjectType.DRUID
