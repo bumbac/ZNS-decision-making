@@ -1,0 +1,18 @@
+# Write your rules to this file
+# Rules could be on more lines, but must end with semicolon (;)
+# You can use hashtag for comment lines, block comments are not supported
+# Grammar definition is described in documentation
+
+
+
+IF player_dont_have_base THEN place_base;
+IF player_have_base AND has_resources_druid THEN place_druid;
+IF player_have_base THEN place_guard 2;
+IF player_have_base AND can_buy_extended_guard THEN place_extended;
+IF player_have_base AND cross_not_occupied AND has_resources_ent THEN place_cross_ent;
+
+
+
+
+
+
