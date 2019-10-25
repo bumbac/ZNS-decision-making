@@ -78,7 +78,6 @@ class ActionBase(IActionBase):
 
     def place_guard(self, z: int):
         Logger.log('Placing guards')
-        x = CubicPosition(-1, 1, 0)
         troop = GameObjectType.ARCHER
         if z == 1:
             troop = GameObjectType.ARCHER
@@ -86,44 +85,38 @@ class ActionBase(IActionBase):
             troop = GameObjectType.KNIGHT
         if z == 3:
             troop = GameObjectType.DRUID
-
-        if not self.map_proxy.is_position_occupied(x):
-            self.game_control_proxy.spawn_unit(
+        x = CubicPosition(-1, 1, 0)
+        self.game_control_proxy.spawn_unit(
                 SpawnInformation(self.player,
                                  troop,
                                  x,
                                  [], []))
         x = CubicPosition(-1, 0, 1)
-        if not self.map_proxy.is_position_occupied(x):
-            self.game_control_proxy.spawn_unit(
+        self.game_control_proxy.spawn_unit(
                 SpawnInformation(self.player,
                                  troop,
                                  x,
                                  [], []))
         x = CubicPosition(0, -1, 1)
-        if not self.map_proxy.is_position_occupied(x):
-            self.game_control_proxy.spawn_unit(
+        self.game_control_proxy.spawn_unit(
                 SpawnInformation(self.player,
                                  troop,
                                  x,
                                  [], []))
         x = CubicPosition(0, 1, -1)
-        if not self.map_proxy.is_position_occupied(x):
-            self.game_control_proxy.spawn_unit(
+        self.game_control_proxy.spawn_unit(
                 SpawnInformation(self.player,
                                  troop,
                                  x,
                                  [], []))
         x = CubicPosition(1, -1, 0)
-        if not self.map_proxy.is_position_occupied(x):
-            self.game_control_proxy.spawn_unit(
+        self.game_control_proxy.spawn_unit(
                 SpawnInformation(self.player,
                                  troop,
                                  x,
                                  [], []))
         x = CubicPosition(1, 0, -1)
-        if not self.map_proxy.is_position_occupied(x):
-            self.game_control_proxy.spawn_unit(
+        self.game_control_proxy.spawn_unit(
                 SpawnInformation(self.player,
                                  troop,
                                  x,
