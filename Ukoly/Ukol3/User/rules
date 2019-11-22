@@ -1,0 +1,58 @@
+# Write your rules to this file
+# Rules could be on more lines, but must end with semicolon (;)
+# You can use hash tag for comment lines, block comments are not supported
+# Grammar definition is described in documentation
+
+
+IF player_dont_have_base AND found_good* THEN build_base_good found_good;
+#IF player_dont_have_base THEN build_base -4 -4;
+
+IF free_tile* 1 AND yes[0.7] THEN place_archer free_tile;
+
+IF free_tile* 1 AND resources_druid[0.0] THEN restore_guard DRUID free_tile WITH 0.3;
+IF free_tile* 1 AND resources_magician[0.0] THEN restore_guard MAGICIAN free_tile;
+
+#IF free_tile* 2 AND resources_knight THEN restore_guard KNIGHT free_tile ;
+#IF free_tile* 2 AND resources_ent1 THEN restore_guard ENT free_tile WITH 0.5;
+IF free_tile* 2 AND resources_druid[0.0] THEN restore_guard DRUID free_tile WITH 0.3;
+IF free_tile* 2 AND resources_magician[0.0] THEN restore_guard MAGICIAN free_tile;
+
+#IF free_tile* 2 AND resources_knight THEN restore_guard KNIGHT free_tile;
+#IF free_tile* 3 AND resources_ent1  THEN restore_guard ENT free_tile WITH 0.5;
+IF free_tile* 3 AND resources_druid[0.0] THEN restore_guard DRUID free_tile WITH 0.3;
+IF free_tile* 3 AND resources_magician THEN restore_guard MAGICIAN free_tile;
+
+#IF free_tile* 3 AND resources_knight THEN restore_guard KNIGHT free_tile;
+#IF free_tile* 4 AND resources_ent1  THEN restore_guard ENT free_tile WITH 0.5;
+IF free_tile* 4 AND resources_druid THEN restore_guard DRUID free_tile WITH 0.3;
+IF free_tile* 4 AND resources_magician THEN restore_guard MAGICIAN free_tile;
+
+#IF free_tile* 4 AND resources_knight THEN restore_guard KNIGHT free_tile;
+#IF free_tile* 5 AND resources_ent1  THEN restore_guard ENT free_tile WITH 0.5;
+IF free_tile* 5 AND resources_druid THEN restore_guard DRUID free_tile WITH 0.3;
+IF free_tile* 5 AND resources_magician THEN restore_guard MAGICIAN free_tile;
+
+#IF free_tile* 5 AND resources_knight THEN restore_guard KNIGHT free_tile;
+#IF free_tile* 6 AND resources_ent1  THEN restore_guard ENT free_tile WITH 0.5;
+IF free_tile* 6 AND resources_druid THEN restore_guard DRUID free_tile WITH 0.3;
+IF free_tile* 6 AND resources_magician THEN restore_guard MAGICIAN free_tile;
+
+IF free_tile* 7 AND  resources_knight THEN restore_guard KNIGHT free_tile;
+IF free_tile* 8 AND  resources_knight THEN restore_guard KNIGHT free_tile;
+IF free_tile* 9 AND  resources_knight THEN restore_guard KNIGHT free_tile;
+IF free_tile* 10 AND  resources_knight THEN restore_guard KNIGHT free_tile;
+IF free_tile* 11 AND  resources_knight THEN restore_guard KNIGHT free_tile;
+IF free_tile* 12 AND  resources_knight THEN restore_guard KNIGHT free_tile;
+IF free_tile* 13 AND  resources_knight THEN restore_guard KNIGHT free_tile;
+IF free_tile* 14 AND  resources_knight THEN restore_guard KNIGHT free_tile;
+IF free_tile* 15 AND  resources_knight THEN restore_guard KNIGHT free_tile;
+IF free_tile* 16 AND  resources_knight THEN restore_guard KNIGHT free_tile;
+IF free_tile* 17 AND  resources_knight THEN restore_guard KNIGHT free_tile;
+IF free_tile* 18 AND  resources_knight THEN restore_guard KNIGHT free_tile;
+
+
+IF near_minotaur[0.5] AND resources_ent1 AND free_tile* 7 THEN restore_guard ENT free_tile;
+
+
+#IF has_guards AND resources_magician AND free_sides* THEN place_magician free_sides WITH 0.2;
+#IF has_guards AND resources_magician AND free_place_from_base2* THEN place_magician_base free_place_from_base2 WITH 0.9;
