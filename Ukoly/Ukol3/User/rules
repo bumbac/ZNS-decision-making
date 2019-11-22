@@ -7,19 +7,19 @@
 IF player_dont_have_base AND found_good* THEN build_base_good found_good;
 #IF player_dont_have_base THEN build_base -4 -4;
 
-IF free_tile* 1 AND yes[0.7] THEN place_archer free_tile;
+#IF free_tile* 1 AND yes[0.7] THEN place_archer free_tile;
 
-IF free_tile* 1 AND resources_druid[0.0] THEN restore_guard DRUID free_tile WITH 0.3;
-IF free_tile* 1 AND resources_magician[0.0] THEN restore_guard MAGICIAN free_tile;
+IF free_tile* 1 AND resources_druid THEN restore_guard DRUID free_tile WITH 0.3;
+IF free_tile* 1 AND resources_magician THEN restore_guard MAGICIAN free_tile;
 
 #IF free_tile* 2 AND resources_knight THEN restore_guard KNIGHT free_tile ;
 #IF free_tile* 2 AND resources_ent1 THEN restore_guard ENT free_tile WITH 0.5;
-IF free_tile* 2 AND resources_druid[0.0] THEN restore_guard DRUID free_tile WITH 0.3;
-IF free_tile* 2 AND resources_magician[0.0] THEN restore_guard MAGICIAN free_tile;
+IF free_tile* 2 AND resources_druid THEN restore_guard DRUID free_tile WITH 0.3;
+IF free_tile* 2 AND resources_magician THEN restore_guard MAGICIAN free_tile;
 
 #IF free_tile* 2 AND resources_knight THEN restore_guard KNIGHT free_tile;
 #IF free_tile* 3 AND resources_ent1  THEN restore_guard ENT free_tile WITH 0.5;
-IF free_tile* 3 AND resources_druid[0.0] THEN restore_guard DRUID free_tile WITH 0.3;
+IF free_tile* 3 AND resources_druid THEN restore_guard DRUID free_tile WITH 0.3;
 IF free_tile* 3 AND resources_magician THEN restore_guard MAGICIAN free_tile;
 
 #IF free_tile* 3 AND resources_knight THEN restore_guard KNIGHT free_tile;
