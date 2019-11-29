@@ -7,5 +7,7 @@ IF player_dont_have_base THEN build_base_1 0 0;
 IF money == low AND free_tile* 3 THEN build ARCHER free_tile;
 IF money == medium AND free_tile* 3 THEN build KNIGHT free_tile;
 IF money == high AND free_tile* 1 THEN build MAGICIAN free_tile;
+
+IF money == high AND free_place != low THEN place ARCHER medium;
 #IF money == high AND free_tile* 3 THEN build STRONG free_tile;
 #IF yes  AND free_tile* 1 THEN build KNIGHT free_tile;

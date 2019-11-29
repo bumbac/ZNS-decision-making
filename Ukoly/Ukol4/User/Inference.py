@@ -47,7 +47,7 @@ class Inference(IInference):
 
                 
 
-         #   condition_cf = self.uncertainty_evaluation(rule.condition)
+#   condition_cf = self.uncertainty_evaluation(rule.condition)
 
 #            if not rule.uncertainty:
 #                rule.uncertainty = 1
@@ -103,6 +103,10 @@ class Inference(IInference):
                     #print("XXXXXX")
                     return self.knowledge_base[self.knowledge_base.index(root_node.value.name)](*root_node.value.args) \
                            == root_node.value.value
+                """ != """
+                if root_node.value.comparator == Operator.NOT_EQUAL:
+                    return self.knowledge_base[self.knowledge_base.index(root_node.value.name)](*root_node.value.args) \
+                           != root_node.value.value
                 """ < """
                 if root_node.value.comparator == Operator.LESS_THEN:
                     return self.knowledge_base[self.knowledge_base.index(root_node.value.name)](*root_node.value.args) \

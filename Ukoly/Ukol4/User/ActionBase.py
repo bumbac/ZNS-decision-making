@@ -58,4 +58,39 @@ class ActionBase(IActionBase):
                              GameObjectType.BASE,
                              OffsetPosition(x,y),
                              [], []))
-
+        #place ARCHER many
+    def place(self, unit, fuzzy):
+        places = self.map_proxy.get_player_visible_tiles()
+        free_place = set()
+        real = GameObjectType.KNIGHT
+        if unit == "KNIGHT":
+            real = GameObjectType.KNIGHT
+        if unit == "ARCHER":
+            real = GameObjectType.ARCHER
+        if unit == "MAGICIAN":
+            real = GameObjectType.MAGICIAN
+        edge = self.map_proxy.get_border_tiles()
+        for i in places:
+            if not self.map_proxy.is_position_occupied(i) and i not in edge:
+                free_place.add(i)
+        if fuzzy == "low":
+            for i in range (2):
+                self.game_control_proxy.spawn_unit(
+                    SpawnInformation(self.player,
+                                     real,
+                                     free_place.pop(),
+                                     [], []))
+        if fuzzy == "medium":
+            for i in range (6):
+                self.game_control_proxy.spawn_unit(
+                    SpawnInformation(self.player,
+                                     real,
+                                     free_place.pop(),
+                                     [], []))
+        if fuzzy == "high":
+            for i in range (10):
+                self.game_control_proxy.spawn_unit(
+                    SpawnInformation(self.player,
+                                     real,
+                                     free_place.pop(),
+                                     [], []))

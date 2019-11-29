@@ -61,8 +61,76 @@ class KnowledgeBase(IKnowledgeBase):
         facts.append(Fact('yes', eval_function=self.yes))
         # Add numerical fact
         facts.append(Fact("money",eval_function=self.money, data=self.money))
+        facts.append(Fact("free_place", eval_function=self.free_place, data=self.free_place))
 
         return facts
+
+    def free_place(self):
+        place = self.map_proxy.get_player_visible_tiles()
+        free_place = 0
+        edge = self.map_proxy.get_border_tiles()
+        for i in place:
+            if not self.map_proxy.is_position_occupied(i) and i not in edge:
+                free_place += 1
+        x = [0] * 3
+        x[0] = self.free_place_low(free_place)
+        x[1] = self.free_place_medium(free_place)
+        x[2] = self.free_place_high(free_place)
+        SUM = 0
+        DIV = 0
+        # hardcoded range of trapezoids
+        # flat part left = 1
+        for i in range(0, 3):
+            SUM += i * x[0]
+            DIV += x[0]
+        # left part going down middle part rising
+        for i in range(2, 4):
+            SUM += i * max(x[0], x[1])
+            DIV += max(x[0], x[1])
+        # middle part = 1
+        for i in range(4, 6):
+            SUM += i * x[1]
+            DIV += x[1]
+        # middle going down
+        # im yelling timber
+        # right part rising
+        for i in range(6, 8):
+            SUM += i * max(x[1], x[2])
+            DIV += max(x[1], x[2])
+        # right part = 1
+        for i in range(8, 10):
+            SUM += i * x[2]
+            DIV += x[1]
+
+        result = SUM / DIV
+        # tazisko
+        if result <= 3:
+            return "low"
+        if result <= 7:
+            return "medium"
+        return "high"
+
+    def free_place_low(self, free_place: int):
+        if free_place <= 2:
+            return 1
+        if free_place >= 3:
+            return 0
+        return (free_place - 3) / (2 - 3)
+
+    def free_place_medium(self, free_place: int):
+        return max(0, min(
+            (free_place - 2) / (4 - 2),
+            1,
+            (8 - free_place) / (8 - 6))
+                   )
+
+    def free_place_high(self, free_place: int):
+        if free_place <= 6:
+            return 0
+        if free_place >= 8:
+            return 1
+        return (free_place - 6) / (8 - 6)
+
 
     def money(self):
         money = self.game_object_proxy.get_resources(self.player)
